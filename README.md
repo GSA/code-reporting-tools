@@ -7,7 +7,7 @@ Builds a `code.json` file using the [CodeInventory](https://github.com/GSA/codei
 Usage:
 
 ```bash
-# outputs a combined code.json for GSA and 18F organizations
+# outputs a combined code.json for GSA, 18F, PIF, and USWDS organizations
 harvest.sh code.json
 ```
 
