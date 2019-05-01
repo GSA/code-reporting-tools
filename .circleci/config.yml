@@ -6,6 +6,7 @@ jobs:
       - image: circleci/ruby:2.4
     working_directory: /tmp
     steps:
+      - checkout
       - run:
           name: Install prerequisites
           command: gem install codeinventory && gem install codeinventory-github
