@@ -43,8 +43,6 @@ for org in ${ORGS[@]} ; do
     delta_s=$(($api_reset - $now))
     delta_m=$(($delta_s / 60 + 1))
     echo "Waiting for API rate limit window to reset due to API rate limiting"
-    echo "Window resets at: $(date -r $api_reset)"
-    echo "Current time:     $(date -r $now)"
     echo -n "Waiting ${delta_m}m:"
     for ((i = 1; i <= delta_m; i++)) ; do
       sleep 60
