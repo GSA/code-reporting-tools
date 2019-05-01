@@ -26,8 +26,33 @@ if [ -z "${GITHUB_ACCESS_TOKEN}" ] ; then
 fi
 
 timestamp=$(date +%Y%M%d%H%M%S)
+rate_limit_pause_mins=15
+
+get_rate_limits() {
+  local headers=$(curl -I -s -u :$GITHUB_ACCESS_TOKEN https://api.github.com/rate_limit)
+  api_limit=$(echo "$headers" | grep '^X-RateLimit-Limit' | cut -f2 -d' ' | tr -d '\r\n')
+  api_remaining=$(echo "$headers" | grep '^X-RateLimit-Remaining' | cut -f2 -d' ' | tr -d '\r\n')
+  api_reset=$(echo "$headers" | grep '^X-RateLimit-Reset' | cut -f2 -d' ' | tr -d '\r\n')
+}
 
 for org in ${ORGS[@]} ; do
+  # Sleep for a bit if we hit 50% of our rate limit quota
+  get_rate_limits
+  if [ $(($api_limit / $api_remaining)) -ge 2 ] ; then
+    now=$(date +%s | tr -d '\r\n')
+    delta_s=$(($api_reset - $now))
+    delta_m=$(($delta_s / 60 + 1))
+    echo "Waiting for API rate limit window to reset due to API rate limiting"
+    echo "Window resets at: $(date -r $api_reset)"
+    echo "Current time:     $(date -r $now)"
+    echo -n "Waiting ${delta_m}m:"
+    for ((i = 1; i <= delta_m; i++)) ; do
+      sleep 60
+      echo -n " $(($delta_m - $i))..."
+    done
+    echo
+  fi
+
   display_name=$(echo $org | cut -f1 -d,)
   github_name=$(echo $org | cut -f2 -d,)
   jsonfile=/tmp/$github_name.${timestamp}.json
