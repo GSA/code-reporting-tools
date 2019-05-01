@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.4
-    working_directory: /tmp
+    working_directory: ~/code-reporting-tools
     steps:
       - checkout
       - run:
@@ -12,9 +12,9 @@ jobs:
           command: gem install codeinventory && gem install codeinventory-github
       - run:
           name: Collect repository metadata
-          command: /tmp/harvest.sh code.json
+          command: ~/code-reporting-tools/harvest.sh code.json
       - store_artifacts:
-          path: /tmp/code.json
+          path: ~/code-reporting-tools/code.json
 
 workflows:
   version: 2
