@@ -1,5 +1,7 @@
 # Code Reporting Tools
 
+The `harvest.sh` script is configured to run overnight quarterly on CircleCI to coincide with quarterly reporting requirements. The CI system produces a finished `code.json` file as an artifact. The scripts can also be run locally.
+
 ## `harvest.sh`
 
 Builds a `code.json` file using the [CodeInventory](https://github.com/GSA/codeinventory) tool. The `codeinventory` and `codeinventory-github` gems must be installed.
