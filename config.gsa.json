@@ -1,0 +1,15 @@
+{
+  "agency": "GSA",
+  "contact_email": "github-admins@gsa.gov",
+  "permissions": {
+    "usageType": "governmentWideReuse"
+  },
+  "GitHub": [
+    {
+      "public_only": false,
+      "orgs": [
+        "GSA"
+      ]
+    }
+  ]
+}

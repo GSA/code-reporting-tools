@@ -1,0 +1,15 @@
+{
+  "agency": "PIF",
+  "contact_email": "pif-team@pif.gov",
+  "permissions": {
+    "usageType": "governmentWideReuse"
+  },
+  "GitHub": [
+    {
+      "public_only": true,
+      "orgs": [
+        "presidential-innovation-fellows"
+      ]
+    }
+  ]
+}

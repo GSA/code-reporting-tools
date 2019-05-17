@@ -1,0 +1,18 @@
+{
+  "agency": "USWDS",
+  "contact_email": "uswds@gsa.gov",
+  "permissions": {
+    "usageType": "governmentWideReuse"
+  },
+  "measurementType": {
+    "method": "modules"
+  },
+  "GitHub": [
+    {
+      "public_only": true,
+      "orgs": [
+        "USWDS"
+      ]
+    }
+  ]
+}

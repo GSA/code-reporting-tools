@@ -1,0 +1,15 @@
+{
+  "agency": "18F",
+  "contact_email": "18f@gsa.gov",
+  "permissions": {
+    "usageType": "governmentWideReuse"
+  },
+  "GitHub": [
+    {
+      "public_only": false,
+      "orgs": [
+        "18F"
+      ]
+    }
+  ]
+}
