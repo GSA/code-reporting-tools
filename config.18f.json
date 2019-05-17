@@ -4,6 +4,9 @@
   "permissions": {
     "usageType": "governmentWideReuse"
   },
+  "measurementType": {
+    "method": "modules"
+  },
   "GitHub": [
     {
       "public_only": false,
