@@ -48,13 +48,13 @@ workflows:
   #   jobs:
   #     - build
   scraper:
-    triggers:
-      - schedule:
-          # First day of each month at 4am UTC
-          cron: "0 4 1 * *"
-          filters:
-            branches:
-              only:
-                - master
+    # triggers:
+    #   - schedule:
+    #       # First day of each month at 4am UTC
+    #       cron: "0 4 1 * *"
+    #       filters:
+    #         branches:
+    #           only:
+    #             - master
     jobs:
       - scraper
