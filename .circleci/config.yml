@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: Install prerequisites
-          command: pip install llnl-scraper && apt-get install cloc jq
+          command: pip install llnl-scraper && sudo apt-get install -y cloc jq
       - run:
           name: Collect metadata
           command: ~/code-reporting-tools/gsa-scraper.sh
