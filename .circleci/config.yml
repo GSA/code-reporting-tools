@@ -1,31 +1,60 @@
 version: 2.1
 
 jobs:
-  build:
+  # harvest:
+  #   docker:
+  #     - image: circleci/ruby:2.4
+  #   working_directory: ~/code-reporting-tools
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Install prerequisites
+  #         command: gem install codeinventory && gem install codeinventory-github
+  #     - run:
+  #         name: Collect repository metadata
+  #         command: ~/code-reporting-tools/harvest.sh code.json
+  #     - store_artifacts:
+  #         path: ~/code-reporting-tools/code.json
+  scraper:
     docker:
-      - image: circleci/ruby:2.4
+      - image: circleci/python:3
     working_directory: ~/code-reporting-tools
     steps:
       - checkout
       - run:
           name: Install prerequisites
-          command: gem install codeinventory && gem install codeinventory-github
+          command: pip install llnl-scraper && apt-get install cloc jq
       - run:
-          name: Collect repository metadata
-          command: ~/code-reporting-tools/harvest.sh code.json
+          name: Collect metadata
+          command: ~/code-reporting-tools/gsa-scraper.sh
+      - run:
+          name: Combine metadata
+          command: ~/code-reporting-tools/combine.sh
       - store_artifacts:
           path: ~/code-reporting-tools/code.json
 
+
 workflows:
   version: 2
-  harvest:
+  # harvest:
+  #   triggers:
+  #     - schedule:
+  #         # Feb 1, May 1, Aug 1, Nov 1 at 4am UTC
+  #         cron: "0 4 1 2,5,8,11 *"
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+  #   jobs:
+  #     - build
+  scraper:
     triggers:
       - schedule:
-          # Feb 1, May 1, Aug 1, Nov 1 at 4am UTC
-          cron: "0 4 1 2,5,8,11 *"
+          # First day of each month at 4am UTC
+          cron: "0 4 1 * *"
           filters:
             branches:
               only:
                 - master
     jobs:
-      - build
+      - scraper
