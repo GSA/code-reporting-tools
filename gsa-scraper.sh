@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 # Run scraper script on each GSA GitHub organization
+# Define each organization in a config.ORGNAME.json file
 
-scraper --config config.gsa.json --output-filename code.gsa.json --skip-labor-hours
-scraper --config config.18f.json --output-filename code.18f.json --skip-labor-hours
-scraper --config config.pif.json --output-filename code.pif.json --skip-labor-hours
-scraper --config config.uswds.json --output-filename code.uswds.json --skip-labor-hours
+configs=$(find -maxdepth 1 -name 'config.*.json')
+
+if [ -z "$configs" ] ; then
+  echo "Please create at least one config file (see https://github.com/LLNL/scraper for details)."
+  exit 1
+fi
+
+echo "Using configs: $(echo $configs | tr -d '\n')"
+
+for config in $configs ; do
+  outfile=$(echo $config | sed 's/config/code/')
+  scraper --config $config --output-filename $outfile --skip-labor-hours
+done
+
