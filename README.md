@@ -4,7 +4,7 @@ This repository contains various tools to support GSA's compliance with the Fede
 
 ## `gsa-scraper.sh` (Scraper)
 
-Builds multiple `code.*.json` files (one per GSA organization) using the [LLNL Scraper](https://github.com/LLNL/scraper) tool. As a prerequisite, you need to have `scraper` installed, which you can accomplish by running `pip install -r requirements.txt`.
+Builds multiple `code.*.json` files (one per GSA organization) using the [LLNL Scraper](https://github.com/LLNL/scraper) tool. As a prerequisite, you need to have `scraper` installed, which you can accomplish by running `pip install -r requirements.txt`. You should also have a config file named `config.ORG_NAME.json` for each GitHub organization you want to scan. See the [LLNL Scraper docs](https://github.com/LLNL/scraper#config-file-options) for information on the config file format.
 
 ## `combine.sh`
 
